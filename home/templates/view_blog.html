@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block body %}
+{% for i in data  %}
+<div class="container">
+    <div class = "row">
+        <div class = "col" align="center">
+            <h1 style="padding:30px">{{i.title}}</h1>
+            <img src="/media/{{i.image}}" alt="..." width="700",height="750" style="padding-bottom:30px">
+            <p>{{i.content|safe}}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock body %}

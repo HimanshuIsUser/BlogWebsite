@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container" style="border-width:2px; border-color:#999999; border-radius:15px; margin:35px; padding:10px;">
+    <h2 align=center>ADD BLOG</h2>
+    <form method="post"  enctype="multipart/form-data">
+        {% csrf_token %}
+        <div classs="row">
+            <div class="col-12">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" name="title" id="title" placeholder="Title">
+            </div>
+            <div class="col-12">
+                {{form.media}}
+                {{form.as_p}}
+            </div>
+            <div class="col">
+                <label for="image">Select image:</label>
+                <input type="file" id="image" name="image" class="form-control">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mx-3 mt-3">Submit</button>
+    </form>
+</div>
+
+<div class="container">
+    {% for i in data %}
+    <div class="row" style="margin:10px; border-width:2px; border-style:solid; border-color:#999999; padding:10px; border-radius:10px;">
+        <div class="col-4">
+            <img src="/media/{{i.image}}" height="250px" width="350px">
+        </div>
+        <div class="col-8">
+            <h2 class="text-center">{{i.title}}</h2>
+            <p>{{i.content|truncatechars_html:550|safe}}</p>
+            <a href="/edit/{{i.slug}}"><button class="btn btn-primary"><span>Edit</span></button></a>
+            <a href = "/delete/{{i.slug}}"><button class="btn btn-danger"><span>Delete</span></button></a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock body %}
+

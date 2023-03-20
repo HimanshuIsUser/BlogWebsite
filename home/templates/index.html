@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+  {% block body %}
+        <div id="main-section" class="landing-page-main">
+          <h1>Most famous places</h1>
+          <span class="landing-page-text15">Recommended</span>
+          <div class="landing-page-cards-container">
+            {% for i in data %}
+            <div class="place-card-container">
+              <a href="/blog/{{i.slug}}">
+              <img alt="image" src="/media/{{i.image}}" class="place-card-image"></a>
+              <div class="place-card-container1">
+                <span class="place-card-text"><span>{{i.title | truncatechars:45}}</span></span>
+                  <a href = "/blog/{{i.slug}}"><button class="outline-button-button button Button"><span>Read Now</span></button></a>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+  {% endblock body %}
