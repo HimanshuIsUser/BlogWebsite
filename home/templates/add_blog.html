@@ -28,7 +28,7 @@
         <div class="col-4">
             <img src="/media/{{i.image}}" height="250px" width="350px">
         </div>
-        <div class="col-8">
+        <div class="col-8" style="overflow-wrap: break-word;" >
             <h2 class="text-center">{{i.title}}</h2>
             <p>{{i.content|truncatechars_html:550|safe}}</p>
             <a href="/edit/{{i.slug}}"><button class="btn btn-primary"><span>Edit</span></button></a>

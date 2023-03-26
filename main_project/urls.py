@@ -24,7 +24,7 @@ urlpatterns = [
     path('login/',include('login.urls')),
     path('',include('home.urls')),
     path('froala_editor/',include('froala_editor.urls')),
-    path('oauth/',include('social_django.urls',namespace='social'))
+    path('social-auth/',include('social_django.urls',namespace='social')),
 ]
 
 if settings.DEBUG:

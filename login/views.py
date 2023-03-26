@@ -24,6 +24,7 @@ class Login(APIView):
         email = request.data['email']
         password = request.data['password']
         user = authenticate(email = email,password = password)
+        print(user)
         if user:
             token = get_access_token(user)
             access_token =token['access_token']
@@ -39,14 +40,14 @@ class Login(APIView):
         return Response('not_valid_Data',status = status.HTTP_406_NOT_ACCEPTABLE)
 
 
-class Shop_registrations_view(APIView):
+class User_registrations_view(APIView):
     def post(self,request):
         try:
             data = request.data
             user = CustomUser.objects.filter(email = data['email'])
             if user:
                 return Response('This email is already registered',status = status.HTTP_406_NOT_ACCEPTABLE)
-            serializer = Shop_serializer(data = data)
+            serializer = User_profile_serializer(data = data)
             if serializer.is_valid():
                 serializer.save()
                 user = CustomUser.objects.create(email = data['email'],password = make_password(data['password']))
@@ -58,6 +59,7 @@ class Shop_registrations_view(APIView):
                             'refresh_token':str(refresh_token),
                             'status':200}
                 return Response(userData,status=status.HTTP_200_OK)
+            print(serializer.errors)
             return Response(serializer.errors,status=status.HTTP_406_NOT_ACCEPTABLE)
         except Exception as e:
             response_Data = str(e)
@@ -70,7 +72,6 @@ def register(request):
 class User_register(APIView):
     def post(self,request):
         try:
-            print('done')
             data = request.data
             user_email = CustomUser.objects.get(email = data['email'])
             if user_email:
@@ -85,7 +86,6 @@ class User_register(APIView):
                                      'refresh_token':str(refresh_token),
                                      'access_token':str(access_token),
                                      'status':200}
-                    print('done')
                     return Response(userDataToken,status=status.HTTP_200_OK)
                 print(serializer.errors)
                 return Response(serializer.errors,status=status.HTTP_406_NOT_ACCEPTABLE)

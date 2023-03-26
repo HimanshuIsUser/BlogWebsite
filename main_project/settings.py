@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
+
 import environ
+
 env = environ.Env()
 environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -43,6 +45,15 @@ INSTALLED_APPS = [
     'home',
     'social_django',
 
+
+    # # all auth library
+    # 'django.contrib.sites',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google',
+
+
 ]
 
 MIDDLEWARE = [
@@ -71,7 +82,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect'
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -146,6 +157,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 from datetime import timedelta
+
 ...
 
 SIMPLE_JWT = {
@@ -154,30 +166,6 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': False,
     'UPDATE_LAST_LOGIN': False,
-
-    # 'ALGORITHM': 'HS256',
-    # 'SIGNING_KEY': SECRET_KEY,
-    # 'VERIFYING_KEY': None,
-    # 'AUDIENCE': None,
-    # 'ISSUER': None,
-    # 'JWK_URL': None,
-    # 'LEEWAY': 0,
-
-    # 'AUTH_HEADER_TYPES': ('Bearer',),
-    # 'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
-    # 'USER_ID_FIELD': 'id',
-    # 'USER_ID_CLAIM': 'user_id',
-    # 'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',
-
-    # 'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
-    # 'TOKEN_TYPE_CLAIM': 'token_type',
-    # 'TOKEN_USER_CLASS': 'rest_framework_simplejwt.models.TokenUser',
-
-    # 'JTI_CLAIM': 'jti',
-
-    # 'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
-    # 'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
-    # 'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
 
@@ -195,18 +183,26 @@ REST_FRAMEWORK = {
 
 
 AUTHENTICATION_BACKENDS = {
+    'django.contrib.auth.backends.ModelBackend',    
     'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
     'social_core.backends.github.GithubOAuth2',
-    
-    'django.contrib.auth.backends.ModelBackend'
 }
 
 
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = 'blog'
+LOGIN_REDIRECT_URL = '/blog'
 
 
-SOCIAL_AUTH_FACEBOOK_KEY = '6471173142913715'
-SOCIAL_AUTH_FACEBOOK_SECRET = '83975f64ccace9b3718f3ebb67dbf0e2'
+SOCIAL_AUTH_FACEBOOK_KEY = '1219738762312714'
+SOCIAL_AUTH_FACEBOOK_SECRET = '5a6a6d1997fba86b42ef8b3db73d2004'
+
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '115586517660-ks65j4naasclftj73om108opel75o15b.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+
+
+
