@@ -7,12 +7,6 @@ class Custom_serializer(serializers.ModelSerializer):
         model = CustomUser
         fields = '__all__'
 
-
-class Shop_serializer(serializers.ModelSerializer):
-    class Meta:
-        model = Shop
-        fields = '__all__'
-
 class User_profile_serializer(serializers.ModelSerializer):
     class Meta:
         model = User_profile

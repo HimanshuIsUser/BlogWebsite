@@ -60,17 +60,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email    
     
-class Shop(models.Model):
-    id = models.UUIDField(primary_key=True,default=uuid.uuid4 , editable=False)
-    name = models.CharField(max_length=150, null=True,blank=True)
-    email = models.EmailField(max_length=254, null=True,blank=True)
-    address = models.TextField(null=True,blank=True)
-    longitude =  models.CharField(max_length=150, null=True,blank=True)
-    latitude = models.CharField(max_length=150, null=True,blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-
 
 class User_profile(models.Model):
     id = models.UUIDField(primary_key=True,default=uuid.uuid4 , editable=False)
